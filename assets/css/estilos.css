@@ -1,55 +1,174 @@
+
+/* === ESTILOS GENERALES === */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f1f1f1;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    background-color: #E6E6FA; /* Fondo lila claro */
 }
 
-h1, h2 {
-    color: #333;
+h1, h2, h3 {
     text-align: center;
+    color: #333;
 }
 
-form {
-    max-width: 400px;
-    margin: 40px auto;
+p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #444;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
     padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
-input, button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    margin-top: 12px;
-    font-size: 1em;
-}
-
-button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #45a049;
-}
-
-a {
-    color: #007BFF;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
+/* === ALERTAS Y MENSAJES === */
 .alert {
     text-align: center;
     color: green;
     font-weight: bold;
     margin-top: 20px;
 }
+
+/* === FORMULARIOS (registro, login, subir video) === */
+.formulario {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 30px auto;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="date"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+label {
+    display: block;
+    margin-top: 15px;
+    color: #666;
+}
+
+/* === BOTONES GENERALES === */
+button, .btn {
+    padding: 10px 30px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #4CAF50;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+button:hover, .btn:hover {
+    background-color: #388E3C;
+}
+
+/* Botones secundarios */
+.botonCancelar {
+    background-color: #FF4D4D;
+}
+
+.botonCancelar:hover {
+    background-color: #D93636;
+}
+
+/* === TARJETAS DE VIDEOS === */
+/* (usado en listado de videos o sugerencias) */
+.card-video {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 15px;
+    margin: 15px auto;
+    max-width: 600px;
+    text-align: center;
+}
+
+.card-video img {
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+.card-video h3 {
+    margin: 10px 0 5px;
+}
+
+.card-video p {
+    color: #555;
+    font-size: 14px;
+}
+
+/* === MENSAJES DE ESTADO === */
+.success {
+    color: #2E7D32;
+    font-weight: bold;
+    text-align: center;
+}
+
+.error {
+    color: #C62828;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* === UTILITARIOS === */
+.text-center {
+    text-align: center;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+
+
+/* === UTILITARIOS === */
+/* === BOTONES SECUNDARIOS === */
+.btn-primary {
+    background-color: #4CAF50;
+}
+
+.btn-primary:hover {
+    background-color: #388E3C;
+}
+
+.btn-secundario {
+    background-color: #007BFF;
+    margin-left: 10px;
+}
+
+.btn-secundario:hover {
+    background-color: #0056b3;
+}
+
+/* === GRUPO DE BOTONES O LINKS === */
+.grupo-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
