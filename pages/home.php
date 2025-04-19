@@ -2,9 +2,8 @@
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
-
-include("navbar.php"); //Aca incluyo el navbar en la pagina
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,10 +13,20 @@ include("navbar.php"); //Aca incluyo el navbar en la pagina
 </head>
 <body>
 
-  <div class="container text-center mt-20">
-    
+  <?php include("navbar.php"); ?>
 
-    
+  <div class="container text-center mt-20">
+
+    <?php
+    if (isset($_GET['subida'])) {
+        if ($_GET['subida'] === 'ok') {
+            echo '<p class="success">✅ Video subido correctamente.</p>';
+        } elseif ($_GET['subida'] === 'error') {
+            echo '<p class="error">❌ Hubo un error al subir el video. Intenta de nuevo.</p>';
+        }
+    }
+    ?>
+
   </div>
 
 </body>

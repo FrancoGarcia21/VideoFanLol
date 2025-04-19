@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="../assets/css/estilos.css">
 </head>
 <body>
+<?php include("navbar.php"); ?>
 
   <div class="container mt-20">
     <h1 class="text-center">📝 Crear cuenta</h1>

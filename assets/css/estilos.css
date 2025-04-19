@@ -33,35 +33,8 @@ p {
 }
 
 /* === FORMULARIOS (registro, login, subir video) === */
-.formulario {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-    margin: 30px auto;
-}
 
-input[type="text"],
-input[type="email"],
-input[type="password"],
-input[type="date"],
-textarea,
-select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 1em;
-    box-sizing: border-box;
-}
 
-label {
-    display: block;
-    margin-top: 15px;
-    color: #666;
-}
 
 /* === BOTONES GENERALES === */
 button, .btn {
@@ -193,5 +166,49 @@ para hacer un "componente reutilizable " no me renderiza el css cargado al mismo
   .navbar span {
     color: #fff;
     margin-right: 20px;
+  }
+
+
+
+  /* === Formulario de subida de videos === */
+
+  .formulario-subida {
+    width: 90%;                /* 🔁 Usamos % para que sea responsivo */
+    max-width: 350px;          /* 🔒 Límite máximo en pantallas grandes */
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .formulario-subida label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9rem;
+  }
+  
+  .formulario-subida input,
+  .formulario-subida textarea,
+  .formulario-subida button {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+  }
+  
+  .formulario-subida button {
+    background-color: #333;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .formulario-subida button:hover {
+    background-color: #555;
   }
   
