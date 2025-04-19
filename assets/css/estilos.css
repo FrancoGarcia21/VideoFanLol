@@ -268,3 +268,10 @@ para hacer un "componente reutilizable " no me renderiza el css cargado al mismo
     transform: scale(1.03);
   }
   
+
+    /* === ver videos  === */
+
+.inline-form {
+    display: inline;
+  }
+  
