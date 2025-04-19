@@ -244,3 +244,27 @@ para hacer un "componente reutilizable " no me renderiza el css cargado al mismo
     100% { opacity: 0; top: 0; }
   }
   
+  /* === Home grilla de videos === */
+
+  .grilla-videos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 30px;
+  }
+  
+  .card-video {
+    width: 300px;
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.2s ease;
+  }
+  
+  .card-video:hover {
+    transform: scale(1.03);
+  }
+  

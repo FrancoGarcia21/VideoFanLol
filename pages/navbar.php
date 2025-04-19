@@ -10,9 +10,28 @@ if (session_status() === PHP_SESSION_NONE) {
     </span>
 
     <?php if (isset($_SESSION['username'])): ?>
-        <span style="color: #fff; margin-right: 20px;">
-            Bienvenido, <?= htmlspecialchars($_SESSION['username']) ?>
-        </span>
+        <div style="display: flex; flex-direction: column; color: #fff; margin-right: 30px;">
+            <span>Bienvenido, <?= htmlspecialchars($_SESSION['username']) ?></span>
+
+            <?php
+            require_once "../backend/conectar.php";
+            $username = $_SESSION['username'];
+            $stmt = $conexion->prepare("SELECT fecha_ultimo_acceso FROM usuarios WHERE username = :username");
+            $stmt->bindParam(":username", $username);
+            $stmt->execute();
+            $usuario = $stmt->fetch();
+
+            if ($usuario && $usuario["fecha_ultimo_acceso"]) {
+                $ultimoAcceso = new DateTime($usuario["fecha_ultimo_acceso"]);
+                $hoy = new DateTime();
+                $diferencia = $hoy->diff($ultimoAcceso)->days;
+
+                echo "<span style='font-size: 0.85em; color: #bbb;'>Último acceso: " .
+                    $ultimoAcceso->format('d/m/Y H:i') . " ($diferencia días atrás)</span>";
+            }
+            ?>
+        </div>
+
         <a href="home.php" style="color: #fff; margin-right: 15px; text-decoration: none;">🏠 Inicio / Buscar</a>
         <a href="subir.php" style="color: #fff; margin-right: 15px; text-decoration: none;">⬆️ Subir video</a>
         <a href="../backend/logout.php" style="color: #fff; text-decoration: none;">🔓 Cerrar sesión</a>
