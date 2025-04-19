@@ -72,9 +72,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $usuario_id = $usuario["id"];
 
-        // Insertar en la tabla videos
-        $sql = "INSERT INTO videos (usuario_id, titulo, descripcion, palabras_clave, lugar, fecha_grabacion, fecha_subida, ruta_archivo, tamanio_mb) 
-                VALUES (:usuario_id, :titulo, :descripcion, :palabras_clave, :lugar, :fecha_grabacion, :fecha_subida, :ruta_archivo, :tamanio_mb)";
+        // Insertar en la tabla videos (sin duración)
+        $sql = "INSERT INTO videos (
+                    usuario_id, titulo, descripcion, palabras_clave, lugar,
+                    fecha_grabacion, fecha_subida, ruta_archivo, tamanio_mb
+                ) VALUES (
+                    :usuario_id, :titulo, :descripcion, :palabras_clave, :lugar,
+                    :fecha_grabacion, :fecha_subida, :ruta_archivo, :tamanio_mb
+                )";
         $stmt = $conexion->prepare($sql);
         $stmt->bindParam(":usuario_id", $usuario_id);
         $stmt->bindParam(":titulo", $titulo);

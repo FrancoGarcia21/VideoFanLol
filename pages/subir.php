@@ -46,8 +46,11 @@ include("navbar.php");
       <button type="submit">📤 Subir video</button>
     </form>
   </div>
-  <script src="/assets/js/validar_video.js"></script>
-  
+
+  <!-- Mensajes visuales flotantes -->
+  <script src="../assets/js/ui-mensajes.js"></script>
+  <!-- Validación del formulario -->
+  <script src="../assets/js/validar_video.js"></script>
 
 </body>
 </html>
