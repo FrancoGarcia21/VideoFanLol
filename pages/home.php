@@ -1,5 +1,9 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
+
+include("navbar.php"); //Aca incluyo el navbar en la pagina
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -11,17 +15,9 @@ session_start();
 <body>
 
   <div class="container text-center mt-20">
-    <h1>🎬 Bienvenido a VideoFanLOL</h1>
+    
 
-    <?php if (isset($_SESSION["username"])): ?>
-      <p class="alert">Hola, <?= htmlspecialchars($_SESSION["username"]) ?> 👋</p>
-      <a href="../backend/logout.php" class="btn btn-secundario">Cerrar sesión</a>
-    <?php else: ?>
-      <div class="grupo-links mt-20">
-        <a href="register.php" class="btn btn-primary">Registrarse</a>
-        <a href="login.php" class="btn btn-secundario">Iniciar sesión</a>
-      </div>
-    <?php endif; ?>
+    
   </div>
 
 </body>

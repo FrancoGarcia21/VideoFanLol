@@ -172,3 +172,26 @@ button:hover, .btn:hover {
     flex-wrap: wrap;
 }
 
+
+/* === NAVBAR === Dejo esto para futuro, no puedo separar el css del navbar porque la funcionalidad include que utilizo
+para hacer un "componente reutilizable " no me renderiza el css cargado al mismo  */
+.navbar {
+    background-color: #333;
+    padding: 10px;
+  }
+  
+  .navbar a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 15px;
+  }
+  
+  .navbar a:hover {
+    text-decoration: underline;
+  }
+  
+  .navbar span {
+    color: #fff;
+    margin-right: 20px;
+  }
+  
