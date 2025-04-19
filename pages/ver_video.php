@@ -22,7 +22,7 @@ if (!$video) {
     exit;
 }
 
-$usuario_id = isset($_SESSION["usuario_id"]) ? $_SESSION["usuario_id"] : null;
+$usuario_id = $_SESSION["usuario_id"] ?? null;
 $stmt = $conexion->prepare("INSERT INTO vistas (video_id, usuario_id) VALUES (:video_id, :usuario_id)");
 $stmt->bindParam(":video_id", $video_id);
 $stmt->bindParam(":usuario_id", $usuario_id);
@@ -67,29 +67,19 @@ $estadisticas = $stats_stmt->fetch(PDO::FETCH_ASSOC);
 
   <div class="mt-20">
     <strong>👁️ Visualizaciones:</strong> <?= $estadisticas["total_vistas"] ?><br>
-    <strong>👍 Me gusta:</strong> <?= $estadisticas["likes"] ?> |
-    <strong>👎 No me gusta:</strong> <?= $estadisticas["dislikes"] ?>
+    <strong>👍 Me gusta:</strong> <span id="contador-likes"><?= $estadisticas["likes"] ?></span> |
+    <strong>👎 No me gusta:</strong> <span id="contador-dislikes"><?= $estadisticas["dislikes"] ?></span>
   </div>
 
   <?php if (isset($_SESSION["usuario_id"])): ?>
     <div class="mt-20">
-      <form action="../backend/me_gusta.php" method="POST" class="inline-form">
-        <input type="hidden" name="video_id" value="<?= $video_id ?>">
-        <input type="hidden" name="tipo" value="me_gusta">
-        <button type="submit" class="btn">👍 Me gusta</button>
-      </form>
-
-      <form action="../backend/me_gusta.php" method="POST" class="inline-form">
-        <input type="hidden" name="video_id" value="<?= $video_id ?>">
-        <input type="hidden" name="tipo" value="no_me_gusta">
-        <button type="submit" class="btn botonCancelar">👎 No me gusta</button>
-      </form>
+      <button class="btn votar-btn" data-video="<?= $video_id ?>" data-tipo="me_gusta">👍 Me gusta</button>
+      <button class="btn botonCancelar votar-btn" data-video="<?= $video_id ?>" data-tipo="no_me_gusta">👎 No me gusta</button>
     </div>
   <?php else: ?>
     <p class="mt-20"><em>🔐 Iniciá sesión para votar.</em></p>
   <?php endif; ?>
 </div>
-
 
 <script src="../assets/js/votar.js"></script>
 
