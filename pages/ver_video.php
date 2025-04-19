@@ -90,5 +90,8 @@ $estadisticas = $stats_stmt->fetch(PDO::FETCH_ASSOC);
   <?php endif; ?>
 </div>
 
+
+<script src="../assets/js/votar.js"></script>
+
 </body>
 </html>
