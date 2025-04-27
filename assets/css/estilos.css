@@ -275,3 +275,43 @@ para hacer un "componente reutilizable " no me renderiza el css cargado al mismo
     display: inline;
   }
   
+    /* === Buscador estilos === */
+
+  .buscador-container {
+    margin-bottom: 30px;
+    margin-top: 20px;
+  }
+  
+  .buscador-container h2 {
+    margin-bottom: 15px;
+  }
+  
+  .buscador-form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .buscador-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 300px;
+  }
+  
+  .buscador-button {
+    padding: 8px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .buscador-button:hover {
+    background-color: #0056b3;
+  }
+  
