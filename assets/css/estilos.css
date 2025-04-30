@@ -4,7 +4,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #E6E6FA; /* Fondo lila claro */
+    background-color: #fae8e6; /* Fondo lila claro */
 }
 
 h1, h2, h3 {
@@ -171,6 +171,16 @@ para hacer un "componente reutilizable " no me renderiza el css cargado al mismo
 
 
   /* === Formulario de subida de videos === */
+
+  #mapa {
+    height: 300px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  
 
   .formulario-subida {
     width: 90%;                /* 🔁 Usamos % para que sea responsivo */
