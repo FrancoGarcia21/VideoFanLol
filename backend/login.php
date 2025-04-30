@@ -1,5 +1,5 @@
 <?php
-session_start(); // Iniciar sesión
+session_start();
 require_once "conectar.php";
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -7,7 +7,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = $_POST["password"];
 
     try {
-        $sql = "SELECT id, password FROM usuarios WHERE username = :username";
+        // 🔍 1. Buscar usuario
+        $sql = "SELECT id, password, fecha_ultimo_acceso FROM usuarios WHERE username = :username";
         $stmt = $conexion->prepare($sql);
         $stmt->bindParam(":username", $username);
         $stmt->execute();
@@ -15,18 +16,23 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($stmt->rowCount() === 1) {
             $usuario = $stmt->fetch(PDO::FETCH_ASSOC);
 
+            // 🔐 2. Verificar contraseña
             if (password_verify($password, $usuario["password"])) {
-                // Guardar en sesión
+
+                // 🧠 3. Guardar datos en sesión
                 $_SESSION["usuario_id"] = $usuario["id"];
                 $_SESSION["username"] = $username;
+                $_SESSION["ultimo_acceso_anterior"] = $usuario["fecha_ultimo_acceso"]; // ✅ CLAVE
 
-                // Actualizar último acceso
+                // 🕒 4. Actualizar último acceso
                 $update = $conexion->prepare("UPDATE usuarios SET fecha_ultimo_acceso = NOW() WHERE id = :id");
                 $update->bindParam(":id", $usuario["id"]);
                 $update->execute();
 
+                // 🔁 5. Redirigir
                 header("Location: ../pages/home.php");
                 exit;
+
             } else {
                 header("Location: ../pages/login.php?error=credenciales");
                 exit;
@@ -37,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
     } catch (PDOException $e) {
-        echo "Error al iniciar sesión: " . $e->getMessage();
+        echo "Error al iniciar sesión: " . htmlspecialchars($e->getMessage());
     }
 }
 ?>
