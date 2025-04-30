@@ -26,6 +26,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $fecha_grabacion = $_POST["fecha_grabacion"];
         $fecha_subida = date("Y-m-d H:i:s");
 
+        // ✅ NUEVO: Capturar latitud y longitud del formulario
+        $latitud = $_POST["latitud"] ?? null;
+        $longitud = $_POST["longitud"] ?? null;
+
         // Validar archivo
         if (!isset($_FILES["video"]) || $_FILES["video"]["error"] !== 0) {
             throw new Exception("Error al subir el archivo.");
@@ -72,14 +76,17 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         $usuario_id = $usuario["id"];
 
-        // Insertar en la tabla videos (sin duración)
+        // ✅ MODIFICADO: ahora insertamos también latitud y longitud
         $sql = "INSERT INTO videos (
                     usuario_id, titulo, descripcion, palabras_clave, lugar,
-                    fecha_grabacion, fecha_subida, ruta_archivo, tamanio_mb
+                    fecha_grabacion, fecha_subida, ruta_archivo, tamanio_mb,
+                    latitud, longitud
                 ) VALUES (
                     :usuario_id, :titulo, :descripcion, :palabras_clave, :lugar,
-                    :fecha_grabacion, :fecha_subida, :ruta_archivo, :tamanio_mb
+                    :fecha_grabacion, :fecha_subida, :ruta_archivo, :tamanio_mb,
+                    :latitud, :longitud
                 )";
+
         $stmt = $conexion->prepare($sql);
         $stmt->bindParam(":usuario_id", $usuario_id);
         $stmt->bindParam(":titulo", $titulo);
@@ -90,6 +97,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt->bindParam(":fecha_subida", $fecha_subida);
         $stmt->bindParam(":ruta_archivo", $nombre_archivo);
         $stmt->bindParam(":tamanio_mb", $tamanio_mb);
+
+        // ✅ NUEVO: bind de coordenadas
+        $stmt->bindParam(":latitud", $latitud);
+        $stmt->bindParam(":longitud", $longitud);
+
         $stmt->execute();
 
         header("Location: ../pages/home.php?subida=ok");
