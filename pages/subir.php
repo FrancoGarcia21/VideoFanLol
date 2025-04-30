@@ -24,6 +24,8 @@ include("navbar.php");
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<link rel="icon" type="image/png" href="../assets/img/favicon.png">
+
   <meta charset="UTF-8">
   <title>Subir Video - VideoFanLOL</title>
   

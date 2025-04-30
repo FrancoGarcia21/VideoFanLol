@@ -111,6 +111,8 @@ if (empty($sugerencias)) {
 
 <html lang="es">
 <head>
+<link rel="icon" type="image/png" href="../assets/img/favicon.png">
+
   <meta charset="UTF-8">
   <title><?= htmlspecialchars($video["titulo"]) ?> - VideoFanLOL</title>
   <link rel="stylesheet" href="../assets/css/estilos.css">
