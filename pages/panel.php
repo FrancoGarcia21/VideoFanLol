@@ -41,7 +41,7 @@ $esSuperPop = $datos['super_pop'];
                     <p><strong>Palabras clave:</strong> <?= htmlspecialchars($video['palabras_clave']) ?></p>
                     <p>👁 <?= $video['visualizaciones'] ?> vistas | 👍 <?= $video['me_gusta'] ?> | 👎 <?= $video['no_me_gusta'] ?></p>
                     <div class="acciones-video">
-                        <a class="btn-editar" href="editar_video.php?id=<?= $video['id'] ?>">✏️ Editar</a>
+                        <a class="btn-editar" href="editar.php?id=<?= $video['id'] ?>">✏️ Editar</a>
                         
                         <a class="btn-eliminar" href="../backend/eliminar_video.php?id=<?= $video['id'] ?>" onclick="return confirm('¿Seguro que querés eliminar este video?')">🗑 Eliminar</a>
 
