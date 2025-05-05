@@ -1,11 +1,10 @@
 <?php
-$host = "localhost";
+$host = "db";                    // 🔁 El nombre del servicio del contenedor MySQL
 $dbname = "videoFanLOL";
-$username = "root";
-$password = ""; // En XAMPP normalmente no hay contraseña
+$username = "videofan";         // 🧑 Usuario definido en docker-compose.yml
+$password = "fan123";           // 🔐 Contraseña definida también
 
 try {
-    // Crear conexión PDO y asignarla a $conexion
     $conexion = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password);
     $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {

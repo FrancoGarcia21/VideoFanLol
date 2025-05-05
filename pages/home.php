@@ -1,4 +1,7 @@
 <?php
+include_once("../init.php");
+
+
 // 📌 Cargar resultados desde archivo backend
 $archivo = realpath(__DIR__ . '/../backend/buscar_videos.php');
 $datosBusqueda = $archivo && file_exists($archivo) ? include($archivo) : null;

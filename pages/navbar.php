@@ -4,6 +4,8 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 ?>
 
+
+
 <nav class="navbar">
     <span class="navbar-title">🎬 VideoFanLOL</span>
 

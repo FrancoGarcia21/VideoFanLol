@@ -14,6 +14,8 @@ $esSuperPop = $datos['super_pop'];
 <!DOCTYPE html>
 <html lang="es">
 <head>
+<link rel="icon" type="image/png" href="../assets/img/favicon.png">
+
     <meta charset="UTF-8">
     <title>Mi Panel</title>
     <link rel="stylesheet" href="../assets/css/estilos.css">

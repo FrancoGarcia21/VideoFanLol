@@ -1,4 +1,3 @@
-
 -- Base de datos
 CREATE DATABASE IF NOT EXISTS videoFanLOL CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 USE videoFanLOL;
@@ -28,6 +27,8 @@ CREATE TABLE videos (
     ruta_archivo VARCHAR(255),
     duracion_segundos INT,
     tamanio_mb FLOAT,
+    latitud DECIMAL(10, 7),        -- 🆕 Coordenada LAT
+    longitud DECIMAL(10, 7),       -- 🆕 Coordenada LNG
     vistas INT DEFAULT 0,
     me_gusta INT DEFAULT 0,
     no_me_gusta INT DEFAULT 0,
