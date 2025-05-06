@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const claves = palabrasClave.value.split(',').map(p => p.trim()).filter(p => p !== "");
     if (claves.length > 10) {
-      errores.push("🚫 Solo se permiten hasta 10 palabras clave.");
+      errores.push("🚫 Solo se permiten hast a 10 palabras clave.");
     }
 
     if (errores.length > 0) {
