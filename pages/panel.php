@@ -18,20 +18,25 @@ $esSuperPop = $datos['super_pop'];
     <title>Mi Panel</title>
     <link rel="stylesheet" href="../assets/css/estilos.css">
     <link rel="icon" href="../assets/img/favicon.png" type="image/x-icon">
+    <script defer src="../assets/js/panel.js"></script>
 </head>
 <body>
-<?php include("navbar.php"); ?>
 
-<div class="container mt-20">
-    <h1 class="titulo-principal">📊 Panel de usuario</h1>
+<header>
+    <?php include("navbar.php"); ?>
+</header>
 
-    <p class="estado-pop">
-        <?= $esSuperPop ? "🌟 Sos un SUPER POP USUARIO" : "🤓 Aún no sos super pop usuario" ?>
-    </p>
+<main class="container mt-20">
+    <section>
+        <h1 class="titulo-principal">📊 Panel de usuario</h1>
+        <p class="estado-pop">
+            <?= $esSuperPop ? "🌟 Sos un SUPER POP USUARIO" : "🤓 Aún no sos super pop usuario" ?>
+        </p>
+    </section>
 
-    <div class="grilla-videos">
+    <section class="grilla-videos">
         <?php foreach ($videos as $video): ?>
-            <div class="card-video">
+            <article class="card-video">
                 <video width="100%" height="auto" preload="metadata">
                     <source src="../assets/uploads/<?= htmlspecialchars($video['ruta_archivo']) ?>" type="video/mp4">
                     Tu navegador no soporta la reproducción de video.
@@ -43,13 +48,26 @@ $esSuperPop = $datos['super_pop'];
                     <p>👁 <?= $video['visualizaciones'] ?> vistas | 👍 <?= $video['me_gusta'] ?> | 👎 <?= $video['no_me_gusta'] ?></p>
                     <div class="acciones-video">
                         <a class="btn-editar" href="editar.php?id=<?= $video['id'] ?>">✏️ Editar</a>
-                        
-                        <a class="btn-eliminar" href="../backend/eliminar_video.php?id=<?= $video['id'] ?>" onclick="return confirm('¿Seguro que querés eliminar este video?')">🗑 Eliminar</a>
-
+                        <a class="btn-eliminar" href="../backend/eliminar_video.php?id=<?= $video['id'] ?>">🗑 Eliminar</a>
                     </div>
                 </div>
-            </div>
+            </article>
         <?php endforeach; ?>
+    </section>
+</main>
+
+<footer class="text-center mt-20">
+  <p>&copy; 2025 VideoFanLOL - Todos los derechos reservados</p>
+</footer>
+
+<!-- Modal personalizado -->
+<div id="modalConfirmacion" class="modal hidden">
+    <div class="modal-contenido">
+        <p>¿Seguro que querés eliminar este video?</p>
+        <div class="modal-botones">
+            <button id="btnConfirmar" class="btn-confirmar">Eliminar</button>
+            <button id="btnCancelar" class="btn-cancelar">Cancelar</button>
+        </div>
     </div>
 </div>
 

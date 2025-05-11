@@ -60,5 +60,8 @@ if (!$video) {
       <button type="submit">💾 Guardar cambios</button>
     </form>
   </div>
+  <footer class="text-center mt-20">
+  <p>&copy; 2025 VideoFanLOL - Todos los derechos reservados</p>
+</footer>
 </body>
 </html>

@@ -97,6 +97,8 @@ $ultimosVideos = $datosBusqueda['ultimosVideos'];
   <?php endif; ?>
 
 </main>
-
+<footer class="text-center mt-20">
+  <p>&copy; 2025 VideoFanLOL - Todos los derechos reservados</p>
+</footer>
 </body>
 </html>

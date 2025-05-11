@@ -209,6 +209,8 @@ if (empty($sugerencias)) {
 </div>
 
 <script src="../assets/js/votar.js"></script>
-
+<footer class="text-center mt-20">
+  <p>&copy; 2025 VideoFanLOL - Todos los derechos reservados</p>
+</footer>
 </body>
 </html>
