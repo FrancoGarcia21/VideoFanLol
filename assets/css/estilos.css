@@ -460,6 +460,87 @@ p {
 
 
 
+/* === Ventana de visualizacion de videos=== */
+#mapa {
+  height: 300px;
+  margin-top: 20px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.card-video {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+.grid-dos-columnas {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+
+.contenido-principal {
+  max-width: 100%;
+}
+
+.sugerencias-lateral {
+  padding: 10px;
+}
+
+.desplegable summary {
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#mapa {
+  height: 300px;
+  margin-top: 10px;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+}
+
+.card-video {
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.acciones-voto {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+
+video {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+
+/* === termina Ventana de visualizacion de videos=== */
+
 
 
 
