@@ -6,33 +6,42 @@
   <title>Registro - VideoFanLOL</title>
   <link rel="stylesheet" href="../assets/css/estilos.css">
 </head>
+<script src="../assets/js/validacion_registro.js"></script>
+
 <body>
+
 <?php include("navbar.php"); ?>
 
-  <div class="container mt-20">
+<main>
+  <section class="container-registro mt-20">
     <h1 class="text-center">📝 Crear cuenta</h1>
 
     <form action="../backend/registrar.php" method="POST" class="formulario">
 
       <label for="username">Usuario</label>
-      <input type="text" name="username" placeholder="Usuario" required>
+      <input type="text" id="username" name="username" placeholder="Usuario" required>
 
       <label for="email">Email</label>
-      <input type="email" name="email" placeholder="Email" required>
+      <input type="email" id="email" name="email" placeholder="Email" required>
 
       <label for="password">Contraseña</label>
-      <input type="password" name="password" placeholder="Contraseña" required>
+      <input type="password" id="password" name="password" placeholder="Contraseña" required>
 
       <label for="fecha_nacimiento">Fecha de nacimiento</label>
-      <input type="date" name="fecha_nacimiento" required>
+      <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" required>
 
       <label for="pais">País</label>
-      <input type="text" name="pais" placeholder="País" required>
+      <input type="text" id="pais" name="pais" placeholder="País" required>
 
       <button type="submit" class="btn btn-primary">Crear cuenta</button>
     </form>
+  </section>
+</main>
 
-  </div>
+<footer class="text-center mt-20">
+  <p>&copy; 2025 VideoFanLOL - Todos los derechos reservados</p>
+</footer>
 
 </body>
 </html>
+

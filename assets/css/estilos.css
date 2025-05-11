@@ -4,7 +4,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #fae8e6; /* Fondo lila claro */
+    background-color: #e6ebfa; /* Fondo lila claro */
 }
 
 h1, h2, h3 {
@@ -32,7 +32,165 @@ p {
     margin-top: 20px;
 }
 
-/* === FORMULARIOS (registro, login, subir video) === */
+
+
+
+/* === FORMULARIOS (login) === */
+.container-login {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.container-login h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.container-login label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.container-login input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.container-login .btn {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+  background-color: #0a2a66;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.container-login .btn:hover {
+  background-color: #094cb0;
+}
+
+.container-login .error,
+.container-login .success {
+  text-align: center;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+/* === Termina formularios del login === */
+
+/* === Comienza formulario de register === */
+
+.container-registro {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.container-registro h1 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.container-registro label {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.container-registro input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.container-registro .btn {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.75rem;
+  background-color: #0a2a66;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+}
+
+.container-registro .btn:hover {
+  background-color: #094cb0;
+}
+
+/* === termina formulario de register === */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -45,7 +203,7 @@ button, .btn {
     border: none;
     border-radius: 5px;
     font-size: 16px;
-    background-color: #4CAF50;
+    background-color: #4caf6f;
     color: white;
     transition: background-color 0.3s ease;
 }
@@ -117,7 +275,7 @@ button:hover, .btn:hover {
 
 
 
-/* === UTILITARIOS === */
+/* === UTILITARIOS === aca afecta globalmente e atodos los bototnes */
 /* === BOTONES SECUNDARIOS === */
 .btn-primary {
     background-color: #4CAF50;
