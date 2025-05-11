@@ -22,13 +22,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $titulo = trim($_POST["titulo"]);
         $descripcion = trim($_POST["descripcion"]);
         $palabras_clave_array = $_POST['palabras_clave'] ?? [];
-        $palabras_clave = implode(',', array_map('trim', $palabras_clave_array)); //
+        $palabras_clave = implode(',', array_map('trim', $palabras_clave_array));
 
-        $lugar = trim($_POST["lugar"]);
+        // Armar lugar a partir de país, provincia y ciudad
+        $pais = trim($_POST["pais"]);
+        $provincia = trim($_POST["provincia"]);
+        $ciudad = trim($_POST["ciudad"]);
+        $lugar = "$pais, $provincia, $ciudad";
+
         $fecha_grabacion = $_POST["fecha_grabacion"];
         $fecha_subida = date("Y-m-d H:i:s");
-
-        // ✅ NUEVO: Capturar latitud y longitud del formulario
         $latitud = $_POST["latitud"] ?? null;
         $longitud = $_POST["longitud"] ?? null;
 
@@ -44,8 +47,39 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             throw new Exception("Solo se permiten archivos .mp4");
         }
 
-        if ($archivo["size"] > 314572800) { // 300 MB
-            throw new Exception("El archivo supera el tamaño máximo permitido de 300MB.");
+        // Obtener ID del usuario
+        $stmt = $conexion->prepare("SELECT id FROM usuarios WHERE username = :username");
+        $stmt->bindParam(":username", $_SESSION["username"]);
+        $stmt->execute();
+        $usuario = $stmt->fetch();
+
+        if (!$usuario) {
+            throw new Exception("Usuario no encontrado.");
+        }
+
+        $usuario_id = $usuario["id"];
+
+        // ✅ Verificar si el usuario es super_pop
+        $stmt = $conexion->prepare("
+            SELECT COUNT(*) AS dias_validos FROM (
+                SELECT DATE(fecha) AS dia, COUNT(*) AS total_vistas
+                FROM vistas
+                WHERE usuario_id = :usuario_id
+                GROUP BY DATE(fecha)
+                HAVING total_vistas >= 100
+                ORDER BY dia DESC
+                LIMIT 3
+            ) AS sub
+        ");
+        $stmt->bindParam(":usuario_id", $usuario_id, PDO::PARAM_INT);
+        $stmt->execute();
+        $resultado = $stmt->fetch(PDO::FETCH_ASSOC);
+        $es_super_pop = $resultado && $resultado["dias_validos"] >= 3;
+
+        // ✅ Validar tamaño según tipo de usuario
+        $limite_bytes = $es_super_pop ? 524288000 : 314572800; // 500MB : 300MB
+        if ($archivo["size"] > $limite_bytes) {
+            throw new Exception("El archivo supera el tamaño máximo permitido de " . ($limite_bytes / 1048576) . "MB.");
         }
 
         // Crear carpeta si no existe
@@ -64,21 +98,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
 
         // Convertir tamaño a MB
-        $tamanio_mb = round($archivo["size"] / 1048576, 2); // 1 MB = 1048576 bytes
+        $tamanio_mb = round($archivo["size"] / 1048576, 2);
 
-        // Obtener ID del usuario
-        $stmt = $conexion->prepare("SELECT id FROM usuarios WHERE username = :username");
-        $stmt->bindParam(":username", $_SESSION["username"]);
-        $stmt->execute();
-        $usuario = $stmt->fetch();
-
-        if (!$usuario) {
-            throw new Exception("Usuario no encontrado.");
-        }
-
-        $usuario_id = $usuario["id"];
-
-        // ✅ MODIFICADO: ahora insertamos también latitud y longitud
+        // Insertar en la base de datos
         $sql = "INSERT INTO videos (
                     usuario_id, titulo, descripcion, palabras_clave, lugar,
                     fecha_grabacion, fecha_subida, ruta_archivo, tamanio_mb,
@@ -99,11 +121,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $stmt->bindParam(":fecha_subida", $fecha_subida);
         $stmt->bindParam(":ruta_archivo", $nombre_archivo);
         $stmt->bindParam(":tamanio_mb", $tamanio_mb);
-
-        // ✅ NUEVO: bind de coordenadas
         $stmt->bindParam(":latitud", $latitud);
         $stmt->bindParam(":longitud", $longitud);
-
         $stmt->execute();
 
         header("Location: ../pages/home.php?subida=ok");

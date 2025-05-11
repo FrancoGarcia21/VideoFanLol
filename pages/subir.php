@@ -20,15 +20,37 @@ include("navbar.php");
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
+<script>
+document.addEventListener("DOMContentLoaded", async function () {
+  const estadoDiv = document.getElementById("estado-superpop");
+
+  try {
+    const response = await fetch("/VideoFanLol/backend/es_super_pop.php");
+    const data = await response.json();
+
+    if (data.super_pop === true) {
+      estadoDiv.textContent = "🌟 ¡Sos un usuario super pop! Podés subir videos de hasta 10 minutos y 500MB.";
+      estadoDiv.classList.add("ok");
+    } else {
+      estadoDiv.textContent = "👤 Usuario estándar. Límite: 5 minutos y 300MB.";
+    }
+  } catch (e) {
+    estadoDiv.textContent = "⚠️ No se pudo verificar el estado super pop.";
+  }
+});
+</script>
+
 <body>
 
 <main class="container mt-20">
   <section class="formulario-container">
     <h2 class="text-center">⬆️ Subir un nuevo video</h2>
+    <div id="estado-superpop" class="mensaje-superpop"></div>
+
 
     <form class="formulario" action="../backend/subir_video.php" method="POST" enctype="multipart/form-data">
 
-      <label for="video">🎥 Archivo de video (.mp4, máx. 300MB):</label>
+      <label for="video">🎥 Archivo de video</label>
       <br>
       <input type="file" name="video" accept="video/mp4" required>
       <br>

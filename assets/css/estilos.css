@@ -346,6 +346,19 @@ p {
   margin-right: 0.5rem;
 }
 
+
+.mensaje-superpop {
+  text-align: center;
+  font-weight: bold;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  color: #155724;
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+}
+
+
 /* ===  termina formulario de subir video === */
 
 
