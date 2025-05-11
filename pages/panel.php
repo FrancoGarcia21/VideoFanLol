@@ -57,7 +57,7 @@ $esSuperPop = $datos['super_pop'];
 </main>
 
 <footer class="text-center mt-20">
-  <p>&copy; 2025 VideoFanLOL - Todos los derechos reservados</p>
+  <p>&copy; 2025 VideoFanLOL - Todos los derechos reservados Franco Garcia</p>
 </footer>
 
 <!-- Modal personalizado -->

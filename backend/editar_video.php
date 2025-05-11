@@ -2,47 +2,64 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: ../pages/login.php");
+    exit;
+}
+
 require_once "conectar.php";
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+try {
+    // Recolección de datos
+    $id = $_POST['id'];
     $usuarioId = $_SESSION['usuario_id'];
-    $videoId = $_POST["id"];
 
-    $stmt = $conexion->prepare("SELECT id FROM videos WHERE id = :id AND usuario_id = :usuario_id");
-    $stmt->bindParam(":id", $videoId);
-    $stmt->bindParam(":usuario_id", $usuarioId);
-    $stmt->execute();
+    $titulo = trim($_POST['titulo']);
+    $descripcion = trim($_POST['descripcion']);
+    $palabras_clave = isset($_POST['palabras_clave']) ? implode(',', $_POST['palabras_clave']) : '';
+    $pais = trim($_POST['pais']);
+    $provincia = trim($_POST['provincia']);
+    $ciudad = trim($_POST['ciudad']);
+    $fecha_grabacion = $_POST['fecha_grabacion'];
+    $latitud = $_POST['latitud'];
+    $longitud = $_POST['longitud'];
 
-    if ($stmt->rowCount() === 0) {
-        echo "No tenés permiso para editar este video.";
-        exit;
+    // Validación simple extra
+    if (!$titulo || !$descripcion || !$fecha_grabacion) {
+        throw new Exception("Faltan campos requeridos.");
     }
 
-    $titulo = trim($_POST["titulo"]);
-    $descripcion = trim($_POST["descripcion"]);
-    $palabras = trim($_POST["palabras_clave"]);
-    $lugar = trim($_POST["lugar"]);
-    $fechaGrabacion = $_POST["fecha_grabacion"];
+    // Consulta de actualización
+    $sql = "UPDATE videos SET 
+        titulo = :titulo,
+        descripcion = :descripcion,
+        palabras_clave = :palabras_clave,
+        pais = :pais,
+        provincia = :provincia,
+        ciudad = :ciudad,
+        fecha_grabacion = :fecha_grabacion,
+        latitud = :latitud,
+        longitud = :longitud
+        WHERE id = :id AND usuario_id = :usuario_id";
 
-    $update = $conexion->prepare("
-        UPDATE videos SET 
-            titulo = :titulo,
-            descripcion = :descripcion,
-            palabras_clave = :palabras,
-            lugar = :lugar,
-            fecha_grabacion = :fecha
-        WHERE id = :id AND usuario_id = :usuario_id
-    ");
-    $update->execute([
-        ":titulo" => $titulo,
-        ":descripcion" => $descripcion,
-        ":palabras" => $palabras,
-        ":lugar" => $lugar,
-        ":fecha" => $fechaGrabacion,
-        ":id" => $videoId,
-        ":usuario_id" => $usuarioId
+    $stmt = $conexion->prepare($sql);
+    $stmt->execute([
+        ':titulo' => $titulo,
+        ':descripcion' => $descripcion,
+        ':palabras_clave' => $palabras_clave,
+        ':pais' => $pais,
+        ':provincia' => $provincia,
+        ':ciudad' => $ciudad,
+        ':fecha_grabacion' => $fecha_grabacion,
+        ':latitud' => $latitud,
+        ':longitud' => $longitud,
+        ':id' => $id,
+        ':usuario_id' => $usuarioId
     ]);
 
     header("Location: ../pages/panel.php?editado=ok");
     exit;
+
+} catch (Exception $e) {
+    echo "<p>Error al editar el video: " . htmlspecialchars($e->getMessage()) . "</p>";
 }

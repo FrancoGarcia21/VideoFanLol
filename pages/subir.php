@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   </section>
 </main>
 <footer class="text-center mt-20">
-  <p>&copy; 2025 VideoFanLOL - Todos los derechos reservados</p>
+  <p>&copy; 2025 VideoFanLOL - Todos los derechos reservados Franco Garcia</p>
 </footer>
 <script src="../assets/js/mapa_video.js"></script>
 <script src="../assets/js/ui-mensajes.js"></script>

@@ -1,13 +1,24 @@
 document.addEventListener("DOMContentLoaded", function () {
   const mapa = L.map('mapa').setView([-40, -63], 4);
 
-  // 🌍 OpenTopoMap con nombres geográficos (incluye Malvinas)
   L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
     attribution: '© OpenTopoMap & contributors',
     maxZoom: 17
   }).addTo(mapa);
 
-  let marcador;
+  const latInput = document.getElementById("latitud");
+  const lngInput = document.getElementById("longitud");
+
+  let lat = parseFloat(latInput?.value);
+  let lng = parseFloat(lngInput?.value);
+  let marcador = null;
+
+  // Si ya hay coordenadas (editar.php), marcarlas
+  if (!isNaN(lat) && !isNaN(lng)) {
+    marcador = L.marker([lat, lng]).addTo(mapa);
+    mapa.setView([lat, lng], 7);
+  }
+
   mapa.on("click", function (e) {
     const { lat, lng } = e.latlng;
 
@@ -17,7 +28,7 @@ document.addEventListener("DOMContentLoaded", function () {
       marcador = L.marker([lat, lng]).addTo(mapa);
     }
 
-    document.getElementById("latitud").value = lat;
-    document.getElementById("longitud").value = lng;
+    latInput.value = lat;
+    lngInput.value = lng;
   });
 });
