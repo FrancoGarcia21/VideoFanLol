@@ -42,10 +42,34 @@ document.addEventListener("DOMContentLoaded", function () {
       errores.push("El país debe tener al menos 3 caracteres.");
     }
 
-    // Si hay errores, evitamos el envío y mostramos alert
+    // Mostrar errores con alerta estilizada
     if (errores.length > 0) {
       e.preventDefault();
-      alert("❌ Errores:\n\n" + errores.join("\n"));
+      mostrarAlertaPersonalizada("Errores", errores.join("\n"), "❌");
     }
   });
 });
+
+// 🔔 Alerta custom reutilizable
+function mostrarAlertaPersonalizada(titulo, mensaje, icono = "⚠️") {
+  const modal = document.getElementById("customAlert");
+  const titleEl = document.getElementById("customAlertTitle");
+  const msgEl = document.getElementById("customAlertMessage");
+  const iconEl = document.getElementById("customAlertIcon");
+  const closeBtn = document.getElementById("customAlertClose");
+
+  if (!modal || !titleEl || !msgEl || !iconEl || !closeBtn) {
+    console.error("❌ Error: No se encontró el modal de alerta personalizado en el HTML.");
+    return;
+  }
+
+  titleEl.textContent = titulo;
+  msgEl.textContent = mensaje;
+  iconEl.textContent = icono;
+
+  modal.classList.remove("hidden");
+
+  closeBtn.onclick = () => {
+    modal.classList.add("hidden");
+  };
+}

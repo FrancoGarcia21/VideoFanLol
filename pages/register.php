@@ -8,6 +8,17 @@
 </head>
 <script src="../assets/js/validacion_registro.js"></script>
 
+
+<div id="customAlert" class="custom-alert hidden">
+  <div class="custom-alert-box">
+    <span id="customAlertIcon">⚠️</span>
+    <h2 id="customAlertTitle">Alerta</h2>
+    <p id="customAlertMessage">Mensaje aquí</p>
+    <button id="customAlertClose">Aceptar</button>
+  </div>
+</div>
+
+
 <body>
 
 <?php include("navbar.php"); ?>
