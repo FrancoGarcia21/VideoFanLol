@@ -17,6 +17,7 @@ $esSuperPop = $datos['super_pop'];
     <meta charset="UTF-8">
     <title>Mi Panel</title>
     <link rel="stylesheet" href="../assets/css/estilos.css">
+    <link rel="icon" href="../assets/img/favicon.png" type="image/x-icon">
 </head>
 <body>
 <?php include("navbar.php"); ?>

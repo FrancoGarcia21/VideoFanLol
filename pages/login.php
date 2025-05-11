@@ -7,6 +7,7 @@
   <meta charset="UTF-8">
   <title>Iniciar sesión - VideoFanLOL</title>
   <link rel="stylesheet" href="../assets/css/estilos.css">
+  <link rel="icon" href="../assets/img/favicon.png" type="image/x-icon">
 </head>
 <body>
 

@@ -2,104 +2,95 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit;
 }
-
 include("navbar.php");
 ?>
-
-<style>
-  #mapa {
-    height: 300px !important;
-    margin: 10px 0;
-    border: 2px solid #333;
-    border-radius: 6px;
-  }
-</style>
-
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<link rel="icon" type="image/png" href="../assets/img/favicon.png">
-
   <meta charset="UTF-8">
   <title>Subir Video - VideoFanLOL</title>
   
+   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <link rel="stylesheet" href="../assets/css/estilos.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const mapa = L.map('mapa').setView([-40, -64], 4);
-
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(mapa);
-
-    let marcador;
-
-    mapa.on("click", function (e) {
-      const { lat, lng } = e.latlng;
-
-      if (marcador) {
-        marcador.setLatLng([lat, lng]);
-      } else {
-        marcador = L.marker([lat, lng]).addTo(mapa);
-      }
-
-      document.getElementById("latitud").value = lat;
-      document.getElementById("longitud").value = lng;
-    });
-  });
-</script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 </head>
 <body>
-  <div class="container mt-20">
-    <h2>⬆️ Subir un nuevo video</h2>
+
+<main class="container mt-20">
+  <section class="formulario-container">
+    <h2 class="text-center">⬆️ Subir un nuevo video</h2>
 
     <form class="formulario" action="../backend/subir_video.php" method="POST" enctype="multipart/form-data">
 
-      <label for="video">Archivo de video (.mp4, máx. 300MB):</label><br>
-      <input type="file" name="video" accept="video/mp4" required><br><br>
+      <label for="video">🎥 Archivo de video (.mp4, máx. 300MB):</label>
+      <br>
+      <input type="file" name="video" accept="video/mp4" required>
+      <br>
 
-      <label for="titulo">Título:</label><br>
-      <input type="text" name="titulo" required><br><br>
+      <label for="titulo">📌 Título:</label>
+      <br>
+      <input type="text" name="titulo" required>
+      <br>
 
-      <label for="descripcion">Descripción:</label><br>
-      <textarea name="descripcion" rows="4" required></textarea><br><br>
+      <div>
+      <label for="descripcion">📝 Descripción:</label>
+      <br>
+      <textarea name="descripcion" rows="4" required></textarea>
+      </div>
+      <br>
 
-      <label for="palabras_clave">Palabras clave (separadas por comas, máx. 10):</label><br>
-      <input type="text" name="palabras_clave" required><br><br>
-
-      <label for="lugar">Lugar de grabación:</label><br>
-      <input type="text" name="lugar" required><br><br>
-
-      <label for="fecha_grabacion">Fecha de grabación:</label><br>
-      <input type="date" name="fecha_grabacion" required><br><br>
-
-      <!-- 🌍 Mapa Leaflet -->
-      <label>Ubicación geográfica (haz clic en el mapa para seleccionar):</label>
+      <label>🏷️ Palabras clave (máx. 10):</label>
+      <div class="checkboxes-palabras">
+        <?php
+        $palabras = ["naturaleza", "animales", "ciudad", "danza", "montaña", "humor", "deporte", "viaje", "ciencia", "arte"];
+        foreach ($palabras as $palabra): ?>
+          <label><input type="checkbox" name="palabras_clave[]" value="<?= $palabra ?>"> <?= ucfirst($palabra) ?></label>
+        <?php endforeach; ?>
+      </div>
+      <br>
+      <div>
+      <label for="pais">🌎 País:</label>
       
-      <div id="mapa" style="position: relative;"></div>
+      <input type="text" name="pais" required>
+      
 
+      <label for="provincia">🗺️ Provincia:</label>
+    
+      <input type="text" name="provincia" required>
+    
 
-      <!-- Coordenadas seleccionadas -->
+      <label for="ciudad">🏙️ Ciudad:</label>
+      
+      <input type="text" name="ciudad" required>
+      </div>
+      <br>
+      
+      <div>
+      <label for="fecha_grabacion">📅 Fecha de grabación:</label>
+    
+      <input type="date" name="fecha_grabacion" required>
+      </div>
+      <br>
+
+      <label>📍 Ubicación geográfica (clic en el mapa):</label>
+      <div id="mapa"></div>
+
       <input type="hidden" name="latitud" id="latitud">
       <input type="hidden" name="longitud" id="longitud">
 
-      <br>
-      <button type="submit">📤 Subir video</button>
+      <button type="submit" class="btn btn-primary">📤 Subir video</button>
     </form>
-  </div>
+  </section>
+</main>
 
-  <!-- Scripts -->
-  <script src="../assets/js/ui-mensajes.js"></script>
-  <script src="../assets/js/validar_video.js"></script>
-
+<script src="../assets/js/mapa_video.js"></script>
+<script src="../assets/js/ui-mensajes.js"></script>
+<script src="../assets/js/validar_video.js"></script>
 </body>
 </html>

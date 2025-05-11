@@ -3,18 +3,35 @@ document.addEventListener("DOMContentLoaded", function () {
   const archivoInput = document.querySelector('input[type="file"]');
   const titulo = document.querySelector('input[name="titulo"]');
   const descripcion = document.querySelector('textarea[name="descripcion"]');
-  const palabrasClave = document.querySelector('input[name="palabras_clave"]');
-  const lugar = document.querySelector('input[name="lugar"]');
   const fechaGrabacion = document.querySelector('input[name="fecha_grabacion"]');
+  const checkboxesClaves = document.querySelectorAll('input[name="palabras_clave[]"]');
 
-  const LIMITE_BYTES = 314572800; // 300 MB
-  const LIMITE_SEGUNDOS = 300;    // 5 minutos
+  const LIMITE_BYTES_NORMAL = 314572800; // 300 MB
+  const LIMITE_SEGUNDOS_NORMAL = 300;    // 5 minutos
 
-  form.addEventListener("submit", function (e) {
-    e.preventDefault(); // Evitamos envío hasta validar todo
+  const LIMITE_BYTES_SUPER = 524288000;  // 500 MB
+  const LIMITE_SEGUNDOS_SUPER = 600;     // 10 minutos
+
+  async function esSuperPop() {
+    try {
+      const res = await fetch("../backend/es_super_pop.php");
+      const data = await res.json();
+      return data.super_pop === true;
+    } catch (e) {
+      console.error("Error verificando super_pop:", e);
+      return false; // por defecto, no es super_pop si falla
+    }
+  }
+
+  form.addEventListener("submit", async function (e) {
+    e.preventDefault();
     const errores = [];
 
     const archivo = archivoInput.files[0];
+    const esSuper = await esSuperPop();
+    const limiteBytes = esSuper ? LIMITE_BYTES_SUPER : LIMITE_BYTES_NORMAL;
+    const limiteSegundos = esSuper ? LIMITE_SEGUNDOS_SUPER : LIMITE_SEGUNDOS_NORMAL;
+
     if (!archivo) {
       errores.push("📂 Debes seleccionar un archivo de video.");
     } else {
@@ -22,24 +39,25 @@ document.addEventListener("DOMContentLoaded", function () {
         errores.push("❌ Solo se permiten archivos .mp4.");
       }
 
-      if (archivo.size > LIMITE_BYTES) {
-        errores.push("❌ El archivo supera los 300MB permitidos.");
+      if (archivo.size > limiteBytes) {
+        errores.push(`❌ El archivo supera el tamaño permitido (${limiteBytes / 1048576}MB).`);
       }
     }
 
     if (!titulo.value.trim()) errores.push("✏️ El título es obligatorio.");
     if (!descripcion.value.trim()) errores.push("📝 La descripción es obligatoria.");
-    if (!palabrasClave.value.trim()) errores.push("🏷️ Las palabras clave son obligatorias.");
-    if (!lugar.value.trim()) errores.push("📍 El lugar de grabación es obligatorio.");
     if (!fechaGrabacion.value) errores.push("📅 La fecha de grabación es obligatoria.");
 
-    const claves = palabrasClave.value.split(',').map(p => p.trim()).filter(p => p !== "");
-    if (claves.length > 10) {
+    // Palabras clave seleccionadas
+    const seleccionadas = Array.from(checkboxesClaves).filter(cb => cb.checked);
+    if (seleccionadas.length === 0) {
+      errores.push("🏷️ Debes seleccionar al menos una palabra clave.");
+    } else if (seleccionadas.length > 10) {
       errores.push("🚫 Solo se permiten hasta 10 palabras clave.");
     }
 
     if (errores.length > 0) {
-      mostrarMensaje(errores.join("\n")); // ✅ CAMBIO
+      mostrarMensaje(errores.join("\n"));
       return;
     }
 
@@ -51,10 +69,10 @@ document.addEventListener("DOMContentLoaded", function () {
       URL.revokeObjectURL(video.src);
       const duracion = video.duration;
 
-      if (duracion > LIMITE_SEGUNDOS) {
-        mostrarMensaje(`⏱ El video dura ${Math.round(duracion)} segundos. Solo se permiten hasta 5 minutos.`);
+      if (duracion > limiteSegundos) {
+        mostrarMensaje(`⏱ El video dura ${Math.round(duracion)} segundos. Solo se permiten hasta ${limiteSegundos / 60} minutos.`);
       } else {
-        form.submit(); // ✅ Todo ok, enviar formulario
+        form.submit(); // ✅ Todo OK
       }
     };
 

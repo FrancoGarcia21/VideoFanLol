@@ -21,7 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         // Datos del formulario
         $titulo = trim($_POST["titulo"]);
         $descripcion = trim($_POST["descripcion"]);
-        $palabras_clave = trim($_POST["palabras_clave"]);
+        $palabras_clave_array = $_POST['palabras_clave'] ?? [];
+        $palabras_clave = implode(',', array_map('trim', $palabras_clave_array)); //
+
         $lugar = trim($_POST["lugar"]);
         $fecha_grabacion = $_POST["fecha_grabacion"];
         $fecha_subida = date("Y-m-d H:i:s");
