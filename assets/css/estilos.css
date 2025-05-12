@@ -370,6 +370,8 @@ p {
     display: flex;
     gap: 10px;
     margin-top: 10px;
+    justify-content: center;
+    
 }
 
 .btn-editar,
@@ -454,7 +456,17 @@ p {
     border: none;
     border-radius: 6px;
     cursor: pointer;
+
 }
+
+
+.estado-pop {
+    font-size: 1.3rem;
+    margin: 1rem auto;
+    text-align: center;
+    font-weight: 500;
+}
+
 
 /* === Termina Panel de usuario === */
 
