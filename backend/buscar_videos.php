@@ -6,6 +6,9 @@ $videosBuscados = [];
 $cantidadResultados = 0;
 $terminoBuscado = '';
 
+echo "<!-- Se ejecutó buscar_videos.php -->";
+
+
 try {
     // 🔍 Búsqueda por término
     if (!empty($_POST['termino'] ?? '')) {
@@ -22,7 +25,7 @@ try {
                OR videos.lugar LIKE :termino 
                OR videos.fecha_subida LIKE :termino
             ORDER BY videos.fecha_subida DESC
-            LIMIT 8
+            LIMIT 5
         ";
 
         $stmt = $conexion->prepare($sql);
@@ -38,7 +41,7 @@ try {
             SELECT id, titulo, descripcion, ruta_archivo 
             FROM videos 
             ORDER BY fecha_subida DESC 
-            LIMIT 8
+            LIMIT 5
         ";
         $stmt = $conexion->prepare($sql);
         $stmt->execute();

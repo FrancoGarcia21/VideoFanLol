@@ -51,7 +51,8 @@ try {
         )";
     }
 
-    $sql .= " ORDER BY v.fecha_subida DESC";
+    $sql .= " ORDER BY v.fecha_subida DESC LIMIT 8";
+
 
     $stmt = $conexion->prepare($sql);
 
