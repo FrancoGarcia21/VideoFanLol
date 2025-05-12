@@ -29,9 +29,6 @@ CREATE TABLE videos (
     tamanio_mb FLOAT,
     latitud DECIMAL(10, 7),        -- 🆕 Coordenada LAT
     longitud DECIMAL(10, 7),       -- 🆕 Coordenada LNG
-    vistas INT DEFAULT 0,
-    me_gusta INT DEFAULT 0,
-    no_me_gusta INT DEFAULT 0,
     FOREIGN KEY (usuario_id) REFERENCES usuarios(id)
 );
 

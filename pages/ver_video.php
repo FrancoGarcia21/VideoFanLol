@@ -156,8 +156,8 @@ if (empty($sugerencias)) {
   </div>
 </main>
 
-<footer class="footer">
-  <p>&copy; 2025 VideoFanLOL - Todos los derechos reservados Franco Garcia</p>
+<footer class="text-center mt-20">
+    <p>&copy; 2025 VideoFanLOL - Todos los derechos reservados Franco Garcia</p>
 </footer>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
