@@ -22,7 +22,7 @@ VideoFanLOL es una aplicación web desarrollada como parte del examen final libr
 - **PHP 8.2 (vanilla)**
 - **JavaScript (vanilla + AJAX)**
 - **HTML5 + CSS3**
-- **MySQL/MariaDB**
+- **MySQL**
 - **XAMPP (Apache + phpMyAdmin)**
 - **Visual Studio Code + Git + GitHub**
 
